@@ -1,4 +1,6 @@
 class MyTasksController < ApplicationController
+  protect_from_forgery
+
   def index
     @my_tasks = MyTask.order(created_at: "DESC").all
   end
@@ -9,11 +11,7 @@ class MyTasksController < ApplicationController
   end
 
   def create
-    my_task = MyTask.new
-    my_task.title = params[:title]
-    my_task.description = params[:description]
-    my_task.public = params[:public]
-    my_task.save
+    WaitWorker.perform_async(5, params.to_json)
     redirect_to my_tasks_path
   end
 end
