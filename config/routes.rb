@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'my_tasks', to: 'my_tasks#list'
+  get 'my_tasks/:id', to: 'my_tasks#show'
+  post 'my_tasks', to: 'my_tasks#create'
 end
