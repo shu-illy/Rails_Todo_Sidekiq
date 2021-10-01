@@ -1,0 +1,24 @@
+<h2>Create My Task</h2>
+
+<%= form_with(model: @my_task, url: {action: 'create'}) do |f| %>
+  <p>Title:
+    <%= f.text_field :title%>
+  </p>
+  <p>Description:<br></p>
+  <%= f.text_area :description %>
+  
+  <p>Public: 
+    <% f.check_box :public %>
+  </p>
+  <%= f.submit "Create" %>
+
+
+<% end %>
+
+<h2>List My Tasks</h2>
+<ul>
+  <% @my_tasks.each do |my_task| %>
+  <li>Title: <a href="/my_tasks/<%= my_task.id %>"><%= my_task.title %></a> Posted Date: <%= my_task.created_at %>
+  </li>
+  <% end %>
+</ul>
